@@ -1,0 +1,29 @@
+[Logger Initialized at 2025/06/17 5:49:16][05:49:16.711] [Log] [FileLogger] Logging to: C:\AARACE\Unity\AAgp_test30\PythonU\project\Windows\runtime_log.txt
+[05:49:17.237] [Log] [GameManager] Game Started. Race is ready to start.
+[05:49:17.239] [Log] [WebSocketClient] Start() begin.
+[05:49:17.446] [Log] [WebSocketClient] WebSocket connected, starting SendDataLoop...
+[05:49:17.704] [Log] [TorqueController] Drag & Inertia settings applied.
+[05:49:17.707] [Log] [PlayerCameraRGB] RenderTexture initialized.
+[05:49:17.731] [Log] [RaceManager] Race Started!
+[05:49:17.823] [Log] [PlayerCameraRGB] Texture2D reinitialized.
+[05:49:17.835] [Warning] [WebSocketClient] WebSocket is not connected.
+[05:49:17.852] [Warning] [WebSocketClient] WebSocket is not connected.
+[05:49:17.861] [Warning] [WebSocketClient] WebSocket is not connected.
+[05:49:17.867] [Log] [WebSocketClient] First data send after race started.
+[05:49:17.868] [Warning] [WebSocketClient] WebSocket is not connected.
+[05:49:17.868] [Warning] [DataLogger] Skipping first log entry to prevent no_image.
+[05:49:17.873] [Warning] [WebSocketClient] WebSocket is not connected.
+[05:49:17.896] [Log] [WebSocketClient] Connected to server.
+[05:49:17.919] [Log] [WebSocketClient] Connection established.
+[05:49:23.098] [Log] [GateTrigger] Gate 0 passed by Robot
+[05:49:34.560] [Log] [RobotStatus] Robot has fallen off the track!
+[05:49:34.561] [Log] [RaceManager] Force finish triggered.
+[05:49:34.562] [Log] [GameManager] Race Ended. Preparing to send data after 100ms delay...
+[05:49:34.566] [Log] [GameManager] Race Ended. Triggering game shutdown...
+[05:49:34.584] [Log] [WebSocketClient] Race ended. Stopping data send.
+[05:49:34.673] [Log] [WebSocketClient] Waiting for ongoing transmissions to complete...
+[05:49:34.778] [Log] [WebSocketClient] Sending race data...
+[05:49:34.785] [Log] [WebSocketClient] Race Data JSON sent successfully.
+[05:49:35.291] [Log] [WebSocketClient] Connection closed via Close().
+[05:49:35.609] [Log] [WebSocketClient] Connection closed.
+[05:49:36.294] [Log] [GameManager] Quitting application...

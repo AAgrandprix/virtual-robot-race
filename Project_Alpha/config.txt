@@ -1,0 +1,24 @@
+# AAGP Configuration File (config.txt)
+
+# Hostname or IP address where Unity will connect
+HOST=localhost
+
+# WebSocket port number
+PORT=12346
+
+# Execution mode:
+# 1 = keyboard (manual driving)
+# 2 = table (CSV playback)
+# 3 = rule_based (rule-based logic control)
+# 4 = ai (use AI model inference)
+MODE_NUM=1
+
+# Unity launch mode:
+# 0 = Launch Unity automatically from GameStart.exe
+# 1 = Launch Unity manually (useful for debugging)
+DEBUG_MODE=1
+
+# JPEG image saving:
+# 0 = Delete images after run (lightweight mode)
+# 1 = Save images for AI training
+JPEG_SAVE=0
