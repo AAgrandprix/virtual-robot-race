@@ -1,0 +1,22 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# IDE/editor
+.vscode/
+.idea/
+*.code-workspace
+
+
+
+# Large files
+*.pth
+
+# Ignore model files but keep directory
+Project_Alpha/models/
+!Project_Alpha/models/.gitkeep
+
+
+# OS-specific
+.DS_Store
+Thumbs.db
