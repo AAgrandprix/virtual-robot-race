@@ -7,8 +7,6 @@ __pycache__/
 .idea/
 *.code-workspace
 
-
-
 # Large files
 *.pth
 

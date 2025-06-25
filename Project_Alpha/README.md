@@ -47,6 +47,40 @@ Make sure the filename is exactly `model.pth`.
 
 ## 🗂 Folder Structure
 
+project/
+│── main.py   
+│── websocket_server.py  
+│── config.py  
+│── config.txt
+│── keyboard_input.py  
+│── table_input.py 
+│── table_input.csv
+｜＿__ data_interative/
+│── rule_based_input.py 
+｜＿__ rule_based_algorithms/
+    │── perception_Startsignal.py
+    │── Linetrace_white.py
+    │── status_Robot.py
+│── inference_input.py 
+└── modesl/ 
+    │── model.ptn
+│── data_manager.py
+｜＿__ Windows/  
+    │── AAgp_test31.exe
+    │── runtime_log.txt
+    │── UnityCrashHandler64.exe
+    │── UnityPlayer.dll
+    │── AAgp_test30_Data/
+    │── MonoBleedingEdge/
+｜＿　training_data/
+    │── /run_YYYYMMDD_HHMMSS/  
+    │   │── images/            
+    │   │   ├── frame_00001.jpg
+    │   │   ├── frame_00002.jpg
+    │   │   ├── ...
+    │   │── metadata.csv         
+    │   │── table_input.csv    
+│   │── UnityLog.txt       
 
 
 
