@@ -13,8 +13,7 @@ You can manually drive the robot, replay pre-recorded torque data, or try rule-b
 
 pip install -r requirements.txt
 
-4. Launch the Unity simulation (`AAgp_test30.exe`)
-5. Run the Python main script:
+4. Run the Python main script:
 
 python main.py
 
