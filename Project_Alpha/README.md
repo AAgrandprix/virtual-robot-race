@@ -64,7 +64,7 @@ project/
 │   └── status_Robot.py
 ├── inference_input.py
 ├── models/
-│   └── model.pth
+│   └── model.pth   <dowonload from google drive>
 ├── data_manager.py
 ├── Windows/
 │   ├── AAgp_test30.exe

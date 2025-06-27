@@ -33,6 +33,7 @@ The goal of this project is to:
 
 ## 📁 Repository Structure
 
+```
 virtual-robot-race/
 ├── Project_Alpha/ # Current active version
 ├── Project_Beta/ # (Coming soon)
@@ -40,6 +41,7 @@ virtual-robot-race/
 ├── .gitignore
 └── LICENSE
 
+```
 
 ---
 
@@ -48,6 +50,29 @@ virtual-robot-race/
 Head to [`Project_Alpha`](./Project_Alpha) for setup instructions.
 
 ---
+
+
+---
+
+## 📦 Install Dependencies
+
+To run this project, you need to install the required Python packages.
+
+We recommend using **Python 3.10 or later**.
+
+Run the following command in your terminal:
+
+
+pip install -r requirements.txt
+
+
+
+This will install all the dependencies listed in the `requirements.txt` file at the root of this repository.
+
+> 💡 Tip: You can use a virtual environment for easier management.
+
+---
+
 
 ## 💡 License
 
