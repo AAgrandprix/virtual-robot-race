@@ -16,7 +16,7 @@ MODE_NUM=1
 # Unity launch mode:
 # 0 = Launch Unity automatically from GameStart.exe
 # 1 = Launch Unity manually (useful for debugging)
-DEBUG_MODE=1
+DEBUG_MODE=0
 
 # JPEG image saving:
 # 0 = Delete images after run (lightweight mode)

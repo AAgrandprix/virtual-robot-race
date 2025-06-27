@@ -20,15 +20,15 @@ def saturate(value, min_val=-1.0, max_val=1.0):
 
 def get_latest_rgb_path():
     """Determine the most recent RGB image path using the A/B flag."""
-    flag_path = os.path.join("data_interative", "latest_RGB_now.txt")
+    flag_path = os.path.join("data_interactive", "latest_RGB_now.txt")
     try:
         with open(flag_path, "r") as f:
             mark = f.read().strip()
             if mark in ("a", "b"):
-                return os.path.join("data_interative", f"latest_RGB_{mark}.jpg")
+                return os.path.join("data_interactive", f"latest_RGB_{mark}.jpg")
     except Exception:
         pass
-    return os.path.join("data_interative", "latest_RGB_a.jpg")  # Default fallback
+    return os.path.join("data_interactive", "latest_RGB_a.jpg")  # Default fallback
 
 class TorqueNet(nn.Module):
     """Simple MLP for torque prediction based on image + SOC."""
