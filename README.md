@@ -55,6 +55,39 @@ Unity launches automatically and the race begins.
 
 ---
 
+## FAQ
+
+**Q. I can't sign in or create my account with Google.**
+Google sign-in is often blocked from cloud VMs, RDP sessions, and some corporate or regional networks. Sign in from a browser on a **normal local PC**. If account creation still fails, try a different network.
+
+**Q. Where does my Player Token come from?**
+You receive it by email (`[aira] Your Player Token`) when you create your account. It is permanent and unique to you. Forgot it? **Re-issue Player Token** from your profile page on [aira-race.com](https://aira-race.com) and it will be re-sent by email. Save it in `player_secret.txt` (the launcher does this for you when you save your token).
+
+**Q. I joined a competition but the verification fails ("not registered").**
+Three things must all be true: (1) you pressed **Join** on the competition page, (2) your **Name** in the aira GUI exactly matches your account display name, and (3) your **Player Token** is set.
+
+**Q. My run finished but my time isn't on the leaderboard.**
+Only **valid, completed** runs are recorded. No time is saved if you ran with **Race Flag = TEST ONLY**, did not complete the required laps, false-started, ran out of battery, or fell off the track. From v1.7.1 the client prints the outcome (`✓ RESULT RECORDED` / `⚠ NO RESULT WAS RECORDED`) at the end of each run.
+
+**Q. What is the difference between Time Attack and Algorithm Submission?**
+- **Time Attack** — your lap time is recorded automatically when the race ends.
+- **Algorithm Submission** (Race-type) — you submit your algorithm as a ZIP and the aira team runs it.
+Each competition's page shows its type.
+
+---
+
+## Live Q&A — Ask the AI mentor
+
+Stuck on setup, an error, or "which file do I change?" aira has a dedicated AI Q&A system (**NotebookLM**) loaded with the official repository and documentation, so it answers project-specific questions far more accurately than a general chatbot.
+
+Use the link below to open the dedicated chat window for this training.
+
+→ **[Ask a question on NotebookLM](https://notebooklm.google.com/notebook/e16cd6bf-f642-459f-91fd-1146aa75398e)**
+
+**Login**: Sign in with your own Google account. For a full walkthrough, see [Lesson 02: Live Q&A](docs/lessons_EN/02_Live_QA_NotebookLM.md).
+
+---
+
 ## Lessons
 
 Step-by-step curriculum — from environment setup to submitting your first competition result.
