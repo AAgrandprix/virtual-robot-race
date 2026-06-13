@@ -76,6 +76,37 @@ stop_event = threading.Event()
 # Global client instances (dictionary keyed by robot_id)
 robot_clients: dict[str, RobotWebSocketClient] = {}
 
+# Minimum effective camera/control rate for a fair race (fps).
+# Below this, the machine is likely too slow to complete a race reliably.
+MIN_CONTROL_RATE_HZ = 8.0
+
+
+def fetch_leaderboard_entry_count(name: str, comp_name: str) -> Optional[int]:
+    """Count leaderboard rows for `name` in Results_<comp_name> via GAS.
+
+    Returns None when the count cannot be determined (no GAS URL, network
+    error, unexpected response) — callers must treat None as "unknown",
+    never as zero.
+    """
+    import json
+    import re
+    import urllib.request
+
+    gas_url = config_loader.GAS_SUBMIT_URL
+    if not gas_url or not name or not comp_name:
+        return None
+
+    sheet = "Results_" + re.sub(r"[^\w]", "_", comp_name)
+    url = f"{gas_url}?action=leaderboard&sheet={sheet}"
+    try:
+        with urllib.request.urlopen(url, timeout=15) as resp:
+            rows = json.loads(resp.read().decode("utf-8"))
+        if not isinstance(rows, list):
+            return None
+        return sum(1 for r in rows if str(r.get("name", "")).strip() == name)
+    except Exception:
+        return None
+
 
 def launch_unity_exe() -> Optional[subprocess.Popen]:
     """Launch the built Unity executable if it exists."""
@@ -700,6 +731,12 @@ async def main() -> None:
         print()
         sys.exit(1)
 
+    # Baseline leaderboard entry count (compared after the race to confirm
+    # whether this run's time was actually recorded)
+    lb_count_before = None
+    if is_comp_mode:
+        lb_count_before = fetch_leaderboard_entry_count(config_loader.NAME, comp_name)
+
     unity_proc = None
 
     try:
@@ -986,8 +1023,46 @@ async def main() -> None:
             except Exception as e:
                 print(f"[Main] Robot{robot_num} video pipeline failed: {e}")
 
-        # 9) Algorithm submission (RACE_FLAG=1 + Race-type competition + non-headless + race completed only)
+        # 8.5) Result check: tell the player explicitly whether a time was recorded
         race_completed = any(c.race_completed for c in robot_clients.values())
+        if race_completed and comp_name not in ("", "Tutorial") and config_loader.RACE_FLAG == 0:
+            print("[Main] " + "=" * 60)
+            print("[Main]  Race Flag is TEST ONLY (RACE_FLAG=0).")
+            print(f"[Main]  This run was NOT submitted to '{comp_name}'.")
+            print("[Main]  Set Race Flag to SUBMIT in the launcher to record your time.")
+            print("[Main] " + "=" * 60)
+        elif race_completed and is_comp_mode:
+            lb_count_after = fetch_leaderboard_entry_count(config_loader.NAME, comp_name)
+            if lb_count_before is None or lb_count_after is None:
+                print(f"[Main] Could not confirm the leaderboard entry (network error)."
+                      f" Please check '{comp_name}' at aira-race.com")
+            elif lb_count_after > lb_count_before:
+                print("[Main] " + "=" * 60)
+                print(f"[Main]  ✓ RESULT RECORDED: your time was submitted to '{comp_name}'.")
+                print("[Main]  See the leaderboard at aira-race.com")
+                print("[Main] " + "=" * 60)
+            else:
+                print("[Main] " + "=" * 60)
+                print("[Main]  ⚠ NO RESULT WAS RECORDED for this run.")
+                print("[Main]  Invalid runs are not counted: fell off the track, false start,")
+                print("[Main]  battery depleted, or required laps not completed.")
+                print("[Main]  Check unity_log.txt in your run folder for the reason.")
+                print("[Main] " + "=" * 60)
+
+        # 8.6) Effective camera/control rate report (machine performance guard)
+        for robot_id, client in robot_clients.items():
+            rate = client.get_image_rate()
+            if rate is None:
+                continue
+            print(f"[Main] {robot_id} effective camera rate: {rate:.1f} fps")
+            if rate < MIN_CONTROL_RATE_HZ:
+                print("[Main] " + "=" * 60)
+                print(f"[Main]  ⚠ {robot_id}: effective rate was only {rate:.1f} fps (design target: 20 fps).")
+                print("[Main]  This machine may be too slow to complete a race reliably.")
+                print("[Main]  (No GPU, virtual machines, or heavy background load can cause this.)")
+                print("[Main] " + "=" * 60)
+
+        # 9) Algorithm submission (RACE_FLAG=1 + Race-type competition + non-headless + race completed only)
         if config_loader.RACE_FLAG == 1 and config_loader.HEADLESS == 0 and is_comp_mode and race_completed:
             comp_type = config_loader.get_comp_type(config_loader.GAS_SUBMIT_URL, comp_name)
             if comp_type and comp_type != "Race":
