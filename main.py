@@ -1076,6 +1076,16 @@ async def main() -> None:
 
         print("[Main] System fully stopped.")
 
+        # Re-save the terminal log so it captures the post-race messages above
+        # (result/rate/submission). The race-end save happens earlier, when
+        # Unity metadata arrives, so without this they would only show on-screen.
+        for client in robot_clients.values():
+            if client.data_manager is not None:
+                try:
+                    client.data_manager.save_terminal_log_from_main()
+                except Exception:
+                    pass
+
     except KeyboardInterrupt:
         print("[Main] KeyboardInterrupt received. Exiting...")
         stop_event.set()
