@@ -4,6 +4,7 @@
 
 import asyncio
 import json
+import time
 import websockets
 from pathlib import Path
 import data_manager
@@ -19,6 +20,10 @@ class RobotWebSocketClient:
         self.race_completed = False  # True only when race_ended received from Unity
         self.robot_config = robot_config or {}
         self.active_robots = active_robots  # List of active robot numbers [1, 2, ...]
+
+        # Image arrival timing (effective perception rate measurement)
+        self._img_first_ts = None
+        self._img_last_ts = None
 
         # Control commands (latest values)
         self.drive_torque = 0.0
@@ -229,6 +234,12 @@ class RobotWebSocketClient:
             if not hasattr(self, '_image_count'):
                 self._image_count = 0
             self._image_count += 1
+
+            # Track arrival timing for the effective rate report at race end
+            now_ts = time.monotonic()
+            if self._img_first_ts is None:
+                self._img_first_ts = now_ts
+            self._img_last_ts = now_ts
             frame_name = f"frame_{self._image_count:06d}.jpg"
             frame_name_file.write_text(frame_name, encoding="utf-8")
 
@@ -289,6 +300,13 @@ class RobotWebSocketClient:
             print(f"[{self.robot_id}] Error saving metadata: {e}")
             import traceback
             traceback.print_exc()
+
+    def get_image_rate(self):
+        """Average image arrival rate (fps) over the run, or None if not measurable."""
+        count = getattr(self, '_image_count', 0)
+        if count < 10 or self._img_first_ts is None or self._img_last_ts <= self._img_first_ts:
+            return None
+        return (count - 1) / (self._img_last_ts - self._img_first_ts)
 
     def get_latest_control(self) -> dict:
         """Get latest control command"""

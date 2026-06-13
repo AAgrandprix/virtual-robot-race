@@ -11,6 +11,21 @@ Train your AI algorithm, race against others, and climb the global leaderboard.
 
 ---
 
+## Requirements
+
+| | |
+|---|---|
+| **OS** | Windows 10 / 11 (64-bit) |
+| **Python** | 3.10 – 3.12 |
+| **GPU** | A dedicated GPU is **strongly recommended** for AI mode. The simulator runs in real time, so the control loop must keep up with the camera (target **20 fps**). |
+| **Environment** | Run on a **physical local PC**. Remote VMs / cloud instances / RDP sessions are **not recommended** (see below). |
+
+> **⚠ Why machine speed matters:** the race world advances in real time and does **not** wait for a slow client. On an underpowered machine (no GPU, or a remote VM), the control loop can drop to a few updates per second — too slow to steer the sample algorithm reliably, so the robot crashes or falls off the track and **no time is recorded**. `main.py` now reports your effective camera rate at the end of each run and warns if it is below 8 fps.
+
+> **⚠ Account sign-in:** create your aira account and sign in from a **browser on your local PC**. Google sign-in is often blocked from datacenter / VM / RDP IP addresses, which can make account creation fail.
+
+---
+
 ## Getting Started
 
 New to aira? The tutorial on the platform walks you through everything — Fork, Setup, and your first race — with video guides.
@@ -62,6 +77,12 @@ No prior AI experience required. Available in English and Japanese.
 ---
 
 ## Version History
+
+### Version 1.7.1 (2026-06-13)
+- **New**: End-of-race result feedback — `main.py` now states clearly whether your time was recorded (`✓ RESULT RECORDED`), was not counted (invalid run: fell off track / false start / battery depleted / laps not completed), or was skipped because Race Flag was `TEST ONLY`
+- **New**: Effective camera-rate report and low-performance warning (warns below 8 fps; design target is 20 fps)
+- **New**: Requirements & troubleshooting guidance (GPU recommended, local PC over remote VM, local-browser account sign-in)
+- *(Client-side only; Unity executable remains `aira_Beta_1.7.exe`.)*
 
 ### Version 1.7 (2026-03-15)
 - **New**: aira HUD redesign — status panel (PLAYER / COMP / MODE / LAP / SOC / STATUS), race timer, camera view with SOC bar
