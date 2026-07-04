@@ -11,6 +11,23 @@ Train your AI algorithm, race against others, and climb the global leaderboard.
 
 ---
 
+## 🏁 Can You Beat the Baseline?
+
+The leaderboard is open. Here's the ladder:
+
+| Time | Entry | What it is |
+|:---|:---|:---|
+| 0:45.7 | `Sample_RuleBased` | The tutorial code in this repo, **unmodified** — your starting point |
+| 0:26.5 | `Sample_AI` | The imitation-learning sample (Lesson 06) |
+| **?** | **You** | ← this row is waiting |
+| 0:21.6 | `Andy` | Organizer's record (pace car — excluded from final results on Jul 15) |
+
+Every stage between 45.7 and 21.6 is documented and reproducible.
+**Start here → [Lesson 05: Rule-Based Control](docs/lessons_EN/05_Rule_Based_Control.md)**
+How it was done → [46s → 21.4s: the full engineering log (Qiita, JP)](https://qiita.com/AndyCornaro/items/712307e0963c2ae085cc)
+
+---
+
 ## Requirements
 
 | | |
